@@ -21,7 +21,7 @@ const Profile = Vue.extend({
     return {
       firstName: "Walter",
       lastName: "White",
-      alias: "Heisenberg",
+      alias: "Heisenberg", 
     };
   },
 });

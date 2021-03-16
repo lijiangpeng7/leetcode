@@ -24,25 +24,37 @@ module.exports = {
     }
   },
   configureWebpack: {
-    devtool: 'source-map'
+    resolve: { extensions: [".ts", ".tsx", ".js", ".json"] },   
+    module: {       
+      rules: [   
+        {   
+          test: /\.tsx?$/,   
+          loader: 'ts-loader',   
+          exclude: /node_modules/,   
+          options: {
+            appendTsSuffixTo: [/\.vue$/],   
+          }   
+        }       
+      ]   
+    } 
   },
-  chainWebpack(config) {
-    // set svg-sprite-loader
-    config.module
-      .rule('svg')
-      .exclude.add(resolve('src/icons'))
-      .end()
-    config.module
-      .rule('icons')
-      .test(/\.svg$/)
-      .include.add(resolve('src/icons'))
-      .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({
-        symbolId: 'icon-[name]'
-      })
-      .end()
-  },
+  // chainWebpack(config) {
+  //   // set svg-sprite-loader
+  //   config.module
+  //     .rule('svg')
+  //     .exclude.add(resolve('src/icons'))
+  //     .end()
+  //   config.module
+  //     .rule('icons')
+  //     .test(/\.svg$/)
+  //     .include.add(resolve('src/icons'))
+  //     .end()
+  //     .use('svg-sprite-loader')
+  //     .loader('svg-sprite-loader')
+  //     .options({
+  //       symbolId: 'icon-[name]'
+  //     })
+  //     .end()
+  // },
   lintOnSave: false,
 }

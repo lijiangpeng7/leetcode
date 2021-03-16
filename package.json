@@ -27,7 +27,9 @@
     "qrcode": "^1.4.4",
     "screenfull": "^5.0.2",
     "vue": "^2.6.11",
+    "vue-class-component": "^7.2.6",
     "vue-i18n": "^8.22.1",
+    "vue-property-decorator": "^9.1.2",
     "vue-qrcode": "^0.3.3",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -53,6 +55,8 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.3",
     "svg-sprite-loader": "^5.0.0",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
     "vue-jest": "^3.0.7",
     "vue-template-compiler": "^2.6.11",
     "vue-virtual-scroller": "^1.0.10"

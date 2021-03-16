@@ -13,8 +13,9 @@ import locale from "element-ui/lib/locale/lang/en"; // lang i18n
 //自定义指令
 import directives from "@/utils/directives";
 
-import { init as ConsoleBan } from "console-ban";
-ConsoleBan()
+// //禁止f12
+// import { init as ConsoleBan } from "console-ban";
+// ConsoleBan()
 
 //混入
 import mixin from "@/mixin/mixin";
