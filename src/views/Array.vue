@@ -1,280 +1,206 @@
 <template>
-    <div>
-        <div>姓名：{{name}}</div>
-        <div>年龄：{{age}}</div>
-        <button @click="setAge(age+1)">长</button>
-
-        <ul>
-            <li
-                v-for="item in list"
-                :key="item"
-            ></li>
-        </ul>
-
-        <input
-            type="text"
-            v-debounce="handleInput"
-        />
-        <span>{{count}}</span>
-
-        <el-table
-            :data="tableData"
-            style="width: 100%"
-        >
-            <el-table-column
-                prop="date"
-                label="日期"
-                width="180"
-            ></el-table-column>
-            <el-table-column
-                prop="name"
-                label="姓名"
-                width="180"
-            ></el-table-column>
-            <el-table-column
-                prop="address"
-                label="地址"
+    <div :class="['index-page', mood ? '' : 'bigger']">
+        <div class="tool-box">
+            <div
+                class="btn"
+                @click="mood = !mood"
+            >{{mood ? '点击变宽' : '点击收缩'}}</div>
+            <div
+                class="btn"
+                @click="insertItem"
+            >添加一个皮卡丘</div>
+            <div class="tips">
+                可以尝试
+                <code>Ctrl</code>、
+                <code>command</code> 和
+                <code>shift</code> 按键
+            </div>
+        </div>
+        <div class="result-box">
+            <vue-drag-select
+                v-model="selectedList"
+                value-key="name"
+                :item-margin="[0, 10, 10, 0]"
+                ref="dragSelect"
             >
-                <template slot-scope="scope">
-                    <el-popover
-                        trigger="click"
-                        placement="bottom"
-                        width="300"
-                        :ref="scope.row.id"
-                        v-model="scope.row.visible"
+                <template v-for="(item, index) in dataList">
+                    <drag-select-option
+                        :key="item.id"
+                        :value="item"
+                        :item-index="index"
                     >
-                        <p class="edit-name">
-                            <el-input
-                                type="text"
-                                placeholder="请输入内容"
-                                maxlength="60"
-                                show-word-limit
-                                style="width: 200px; margin-right: 10px"
-                                size="small"
-                            ></el-input>
-                            <!-- <el-button type="text" @click="confirmEditName(scope)">确定</el-button> -->
-                            <el-button
-                                type="text"
-                                @click="scope._self.$refs[scope.row.id].doClose()"
-                            >取消</el-button>
-                        </p>
-                        <p slot="reference">
-                            {{ scope.row.name }}
-                            <i class="el-icon-edit"></i>
-                        </p>
-                    </el-popover>
+                        <div
+                            class="item-self"
+                            @mouseover.stop="mouseOver(item)"
+                            @mouseleave.stop="mouseLeave(item)"
+                        >
+                            <img
+                                v-if="index === 100"
+                                src="../assets/images/prank.jpg"
+                            />
+                            <img
+                                v-else-if="item.lip"
+                                src="../assets/images/1.jpg"
+                            />
+                            <img
+                                v-else
+                                src="../assets/images/0.jpg"
+                            />
+                            <span style="position:absolute;left:0;color:red;background:white;font-size: 30px">{{item.active || isBelongCheckList(item) ? 'active' :''}}</span>
+                        </div>
+                    </drag-select-option>
                 </template>
-            </el-table-column>
-
-        </el-table>
-
-        <!--BFC 解决margin-->
-        <p>hhh</p>
-        <div class="p2">
-            <p>ddddddd</p>
+            </vue-drag-select>
         </div>
-
-        <!--BFC 两栏自适应-->
-        <div class="box">
-            <div class="left"></div>
-            <div class="right"></div>
-        </div>
-
-        <!--BFC 清除浮动-->
-        <div class="float-box">
-            <div class="left"></div>
-        </div>
-
-        <ul ref="list"></ul>
-
-        <ul>
-            <li
-                v-for="city in cityList"
-                :key="city"
-            >{{city}}</li>
-        </ul>
-
-        <ul>
-            <li
-                v-for="item in list"
-                :key="item"
-            >{{item}}</li>
-        </ul>
-        <el-button @click="handleAppend">点击</el-button>
     </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import Test from '@/components/Test';
-let store = Vue.observable({ name: 'bob', age: 10 });
-let mutations = {
-    setAge(age) {
-        store.age = age;
-    },
-};
 export default {
-    extends: Test,
     data() {
         return {
-            list: [1, 2, 3],
-            city: 1,
-            count: 1,
-            tableData: [
-                {
-                    visible: false,
-                    id: 1,
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄',
-                },
-                {
-                    visible: false,
-                    id: 2,
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄',
-                },
-                {
-                    visible: false,
-                    id: 3,
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄',
-                },
-                {
-                    visible: false,
-                    id: 4,
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                },
-            ],
-            cityList: [],
+            mood: true,
+            dataList: [],
+            selectedList: [],
+            id: 300,
         };
     },
-    computed: {
-        name() {
-            return store.name;
-        },
-        age() {
-            return store.age;
-        },
+    created() {
+        this.dataList = [];
+        for (let i = 50; i <= 300; i++) {
+            this.dataList.push({
+                id: i,
+                name: i,
+            });
+        }
     },
-    mounted() {
-        // this.testExtends();
-        // this.hello();
-        // console.log(this.$refs);
-        let total = this.list.reduce((acc, cur) => {
-            return acc + cur;
-        });
-        this.sayHi();
-
-        const shape = {
-            radius: 10,
-            diameter() {
-                return this.radius * 2;
-            },
-            perimeter: () => 2 * Math.PI * this.radius,
-        };
-
-        // shape.perimeter();
-        // this.createLi();
-        // this.createLiFragment();
-        // this.freezeCityList();
-        this.Obj2Json();
+    watch: {
+        selectedList() {
+            console.log(this.selectedList);
+        },
+        mood() {
+            clearTimeout(this.timeClick);
+            this.timeClick = setTimeout(() => {
+                this.$refs.dragSelect.elementLayout(200, 230);
+            }, 500);
+        },
     },
 
     methods: {
-        handleAppend() {
-            this.list.push(1);
-            this.list.splice(0, this.list.length);
-            this.list[0] = 'hahahah';
+        isBelongCheckList(item) {
+            let idx = this.selectedList.findIndex(
+                (entry) => entry.id == item.id
+            );
+            return idx !== -1;
         },
-        ...mutations,
-        handleInput() {
-            this.count++;
-            console.log('input change');
+        mouseOver() {},
+        insertItem() {
+            const { id, name } = this.dataList.reduce((p, v) =>
+                p.id < v.id ? v : p
+            );
+            this.dataList.splice(2, 0, {
+                id: id + 1,
+                name: name + 1,
+                lip: true,
+            });
         },
-        sayHi() {
-            var name = 'bob';
+        mouseOver(item) {
+            console.log('mouserOver');
+            this.$nextTick(function () {
+                this.$set(item, 'active', true);
+            });
         },
-        createLi() {
-            console.time('test');
-            let fragment = document.createDocumentFragment();
-            for (let i = 0; i < 10000; i++) {
-                var li = document.createElement('li');
-                li.innerText = i;
-                this.$refs.list.appendChild(li);
-            }
-            console.timeEnd('test');
-        },
-        createLiFragment() {
-            console.time('test fragment');
-            let fragment = document.createDocumentFragment();
-            for (let i = 0; i < 10000; i++) {
-                var li = document.createElement('li');
-                li.innerText = i;
-                fragment.appendChild(li);
-            }
-            this.$refs.list.appendChild(fragment);
-            console.timeEnd('test fragment');
-        },
-        freezeCityList() {
-            let citys = ['北京', '藁城区', '石家庄'];
-            this.cityList = Object.freeze(citys);
-            citys[0] = '1';
-        },
-        Obj2Json() {
-            let obj = {
-                name: 'bob',
-                getAge() {
-                    return 11;
-                },
-                hh: undefined,
-                date: new Date(),
-                friend: null,
-            };
-            let arr = [null, undefined];
-            console.log('obj', JSON.stringify(obj));
-            console.log('arr', JSON.stringify(arr));
+        // // 移出
+        mouseLeave(item) {
+            this.$set(item, 'active', false);
+            this.dataList.forEach((itm) => {
+                if (itm.checked == true) {
+                    this.$set(itm, 'active', true);
+                }
+            });
         },
     },
 };
 </script>
 
-<style lang="scss" scoped>
-.bod {
-    display: contents;
-}
-p {
-    margin: 10px;
-    background-color: red;
-}
-.p2 {
-    overflow: hidden;
-}
-.box {
-    .left {
-        width: 100px;
-        height: 100px;
-        float: left;
-        background-color: green;
+<style lang="less">
+.index-page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0 0 0 400px;
+    transition: all 0.3s ease;
+    .tool-box {
+        position: absolute;
+        left: 10px;
+        top: 50px;
+        .btn {
+            width: 200px;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #2d8cf0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            &:hover {
+                background-color: #57a3f3;
+            }
+            &:focus {
+                box-shadow: 0 0 0 2px rgba(45, 140, 240, 0.2);
+            }
+            &:active {
+                background-color: #2d8cf0;
+            }
+        }
+        .tips {
+            code {
+                background: #000;
+                color: #fff;
+                padding: 10px;
+                border-radius: 6px;
+            }
+        }
     }
-    .right {
-        background-color: yellow;
-        height: 200px;
-        overflow: hidden;
+    .result-box {
+        width: 100%;
+        height: 500px;
+        padding-top: 100px;
+        transition: all 0.3s;
+        .vue-drag-select {
+            background-color: #ddd;
+        }
+        .item-self {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            border: 1px solid #fff;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            &:hover {
+                box-shadow: 0px 2px 20px -2px rgba(0, 0, 0, 0.5);
+            }
+            img {
+                width: 100%;
+            }
+        }
+        .selected-item {
+            .item-self {
+                border: 1px solid red;
+                border-color: rgb(65, 98, 255);
+                box-shadow: rgb(65, 98, 255) 0px 0px 0px 2px !important;
+            }
+        }
     }
 }
-.float-box {
-    background: red;
-    overflow: hidden;
-    .left {
-        width: 100px;
-        height: 100px;
-        float: left;
-        background-color: green;
+.bigger {
+    width: 100%;
+    padding: 0 0 0 100px;
+    .result-box {
+        height: 600px;
     }
 }
 </style>

@@ -62,14 +62,16 @@ const inst = new myClass();
 ## 新增的语法
 
 1. let const
-2. Array 的扩展 Array.from()，find()，findIndex()，includes()
-3. 解构赋值，数组解构，对象解构
-4. symbol 类型
-5. Proxy
-6. 箭头函数，函数参数默认值
-7. Number 扩展，Number.isFinite(),Number.isNaN(),
-8. 指数运算符 **2\*\*2**(4)
-9. Set 和 Map
+2. Array 的扩展 Array.from()，find()，findIndex()，includes()，entyrs()，keys()，values()，flat()
+3. 字符串的扩展 模板字符串 trimStart(), trimEnd(), includes(), padStart(), replaceAll()
+4. Number 扩展，Number.isFinite(),Number.isNaN(), Number.parseInt(), Number.parseFloat()
+5. 函数的扩展， 指定函数默认值。可以与解构赋值的默认值结合。箭头函数 this 指向定义的时候对象
+6. 解构赋值，数组解构，对象解构
+7. symbol 类型
+8. Proxy
+9. 箭头函数，函数参数默认值
+10. 指数运算符 **2\*\*2**(4)
+11. Set 和 Map
 
 ```javascript
 Number.isInteger(22);

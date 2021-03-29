@@ -49,6 +49,11 @@ Vue.prototype.bus = new Vue();
 // })
 // fundebugVue(fundebug, Vue);
 
+import vueDragSelectPro from "vue-drag-select-pro";
+// 注意：一定要引入css样式
+import "vue-drag-select-pro/lib/vueDragSelectPro.css";
+Vue.use(vueDragSelectPro);
+
 new Vue({
   router,
   store,
