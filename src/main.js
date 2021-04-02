@@ -8,6 +8,10 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import locale from "element-ui/lib/locale/lang/en"; // lang i18n
 
+//点击外部隐藏
+import vClickOutside from "v-click-outside";
+Vue.use(vClickOutside);
+
 // import i18n from '@/plugins/i18n';
 
 //自定义指令
@@ -18,8 +22,8 @@ import directives from "@/utils/directives";
 // ConsoleBan()
 
 //混入
-import mixin from "@/mixin/mixin";
-Vue.mixin(mixin);
+// import mixin from "@/mixin/mixin";
+// Vue.mixin(mixin);
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale });
@@ -49,10 +53,10 @@ Vue.prototype.bus = new Vue();
 // })
 // fundebugVue(fundebug, Vue);
 
-import vueDragSelectPro from "vue-drag-select-pro";
-// 注意：一定要引入css样式
-import "vue-drag-select-pro/lib/vueDragSelectPro.css";
-Vue.use(vueDragSelectPro);
+// import vueDragSelectPro from "vue-drag-select-pro";
+// // 注意：一定要引入css样式
+// import "vue-drag-select-pro/lib/vueDragSelectPro.css";
+// Vue.use(vueDragSelectPro);
 
 new Vue({
   router,

@@ -1,41 +1,64 @@
 <template>
-  <div>
-    <input type="text" ref="inp" />
-  </div>
+    <div>
+        <testProps
+            :age1="111"
+            :originalData="formData"
+            :list="list"
+            greeting-text="hi"
+            @visibleChange="doSomething"
+            v-model="lovingVue"
+            :title.sync="doc"
+        >
+            <div>hello</div>
+        </testProps>
+        <input
+            type="text"
+            @focus="isShow = true"
+        >
+        <div v-click-outside="onClickOutside">11111111111</div>
+    </div>
 </template>
 
 <script>
+import MiniPlayer from '@/components/mini-player';
+import testProps from '@/components/testProps';
 export default {
-  data() {
-    return {
-      timer: null,
-      tableData: [
-      ],
-    };
-  },
-  methods: {
-    fn() {
-      let timer = setInterval(() => {
-        console.log(222222221);
-      }, 1000);
-      this.$once("hook:beforeDestroy", () => {
-        console.log("执行");
-        clearInterval(timer);
-        timer = null;
-      });
+    components: { testProps, MiniPlayer },
+    data() {
+        return {
+            isShow: false,
+            timer: null,
+            tableData: [],
+            formData: {
+                area: '1',
+                range: '2',
+            },
+            list: [1, 2, 3],
+            lovingVue: '',
+            doc: {
+                title: '近今',
+            },
+        };
     },
-  },
-  mounted() {
-    // this.timer = setInterval(() => {
-    //   console.log(111);
-    // }, 1000);
-    this.fn();
-  },
-  beforeDestroy() {
-    console.log("destory");
-    // clearInterval(this.timer);
-    // this.timer = null;
-  },
+    methods: {
+        onClickOutside() {
+            console.log('hhhhh');
+            this.isShow = false;
+        },
+        fn() {
+            let timer = setInterval(() => {
+                console.log(222222221);
+            }, 1000);
+            this.$once('hook:beforeDestroy', () => {
+                console.log('执行');
+                clearInterval(timer);
+                timer = null;
+            });
+        },
+        doSomething() {
+            console.log('监听到了');
+        },
+    },
 };
 </script>
 

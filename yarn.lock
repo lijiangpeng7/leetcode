@@ -10768,6 +10768,11 @@ uuid@^8.3.0:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.3.2.tgz?cache=0&sync_timestamp=1607460209394&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=
 
+v-click-outside@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.npm.taobao.org/v-click-outside/download/v-click-outside-3.1.2.tgz#1dbaa14bf09a21bd16f23a38f03bfa3988f71281"
+  integrity sha1-HbqhS/CaIb0W8jo48Dv6OYj3EoE=
+
 v8-compile-cache@^2.0.3:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/v8-compile-cache/download/v8-compile-cache-2.2.0.tgz#9471efa3ef9128d2f7c6a7ca39c4dd6b5055b132"
@@ -10877,6 +10882,14 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-mini-player@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.npm.taobao.org/vue-mini-player/download/vue-mini-player-0.2.1.tgz#62425bb52648ebe58784b4d30e94a495f9193029"
+  integrity sha1-YkJbtSZI6+WHhLTTDpSklfkZMCk=
+  dependencies:
+    core-js "^2.6.5"
+    vue "^2.6.10"
 
 vue-observe-visibility@^0.4.4:
   version "0.4.6"

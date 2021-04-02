@@ -2,15 +2,15 @@
 //可以混合实例对象选项，如果有相同
 const mixin = {
   methods: {
-    hello() {
-      console.log('hello mixin')
-    }
+    $_hello() {
+      console.log("hello mixin");
+    },
   },
   data() {
     return {
-      age: 18
-    }
-  }
-}
+      $_age: 18,
+    };
+  },
+};
 
 export default mixin;
