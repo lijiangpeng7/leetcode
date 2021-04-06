@@ -15,14 +15,19 @@
             type="text"
             @focus="isShow = true"
         >
-        <div v-click-outside="onClickOutside">11111111111</div>
+        <div v-copy="handelSuccess">11111111111</div>
+
     </div>
 </template>
 
 <script>
+import copy from '@/directives/copy/copy';
 import MiniPlayer from '@/components/mini-player';
 import testProps from '@/components/testProps';
 export default {
+    directives: {
+        copy,
+    },
     components: { testProps, MiniPlayer },
     data() {
         return {
@@ -41,6 +46,9 @@ export default {
         };
     },
     methods: {
+        handelSuccess() {
+            console.log('拷贝成功');
+        },
         onClickOutside() {
             console.log('hhhhh');
             this.isShow = false;
