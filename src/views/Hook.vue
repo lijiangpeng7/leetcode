@@ -1,6 +1,6 @@
 <template>
     <div>
-        <testProps
+        <!-- <testProps
             :age1="111"
             :originalData="formData"
             :list="list"
@@ -15,8 +15,8 @@
             type="text"
             @focus="isShow = true"
         >
-        <div v-copy="handelSuccess">11111111111</div>
-
+        <div v-copy="handelSuccess">11111111111</div> -->
+        <DragSelect></DragSelect>
     </div>
 </template>
 
@@ -24,11 +24,12 @@
 import copy from '@/directives/copy/copy';
 import MiniPlayer from '@/components/mini-player';
 import testProps from '@/components/testProps';
+import DragSelect from '@/components/drag-select';
 export default {
     directives: {
         copy,
     },
-    components: { testProps, MiniPlayer },
+    components: { testProps, MiniPlayer, DragSelect },
     data() {
         return {
             isShow: false,
