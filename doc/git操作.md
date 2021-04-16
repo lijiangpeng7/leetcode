@@ -78,3 +78,12 @@ git push [origin] [branch_name]
 ## vscode 中 git commit 规范
 
 安装 `git-commit-plugin`插件
+
+## 解决 git 大小写不敏感问题
+
+1. 找到`.git/config`文件，修改`ignorecase`为 false
+2. 在项目根目录下运行如下代码：
+
+```
+git config core.ignorecase false
+```
