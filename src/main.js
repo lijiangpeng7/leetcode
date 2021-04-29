@@ -58,6 +58,9 @@ import vueDragSelectPro from "vue-drag-select-pro";
 import "vue-drag-select-pro/lib/vueDragSelectPro.css";
 Vue.use(vueDragSelectPro);
 
+import plugin1 from "@/plugin/plugin1";
+Vue.use(plugin1);
+
 new Vue({
   router,
   store,
