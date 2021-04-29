@@ -1,4 +1,4 @@
-## 分支操作 1
+## 分支操作
 
 1. 本地创建分支并提交到远程
 
@@ -26,8 +26,6 @@ git remote update origin --prune
 ```
 
 ## merge 操作
-
-1.
 
 ## upstream
 

@@ -10,6 +10,7 @@
     "test": "jest --clearCache && vue-cli-service test:unit"
   },
   "dependencies": {
+    "ali-oss": "^6.15.2",
     "axios": "^0.19.2",
     "chance-cli": "^1.0.7",
     "console-ban": "^1.5.0",

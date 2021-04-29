@@ -45,6 +45,14 @@ export default {
             this.$emit('update:title', { a: 1 });
         },
     },
+    mounted() {
+        Vue.nextTick(() => {
+            console.log('this1', this);
+        });
+        this.$nextTick(() => {
+            console.log('this2', this);
+        });
+    },
 };
 </script>
 

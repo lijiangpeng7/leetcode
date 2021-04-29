@@ -3,6 +3,7 @@
         <el-button @click="onDownloadText">blob下载</el-button>
         <el-button @click="downloadUrlFile">url下载视频</el-button>
         <el-button @click="downloadUrlImg">url下载图片</el-button>
+        <el-button @click="downloadOssFile">url下载OSS</el-button>
     </div>
 </template>
 
@@ -26,7 +27,9 @@ export default {
         downloadUrlFile() {
             FileSave.downloadByUrl(
                 // 'https://mira-1255830993.cos.ap-shanghai.myqcloud.com/whale1/concat/a349fc64f6069b4a98f18087cefcf1c8df876aa7866d4da68fba05879a69845a_cut_1%E5%AF%B91_0_x_a349fc64f6069b4a98f18087cefcf1c8df876aa7866d4da68fba05879a69845a_cut_1%E5%AF%B91_1.mp4',
-                'https://whale-material.oss-cn-zhangjiakou.aliyuncs.com/material/video/efa49444e8eb4dc38d8309d7128bfa35.mp4',
+                // 'https://whale-material.oss-cn-zhangjiakou.aliyuncs.com/material/video/efa49444e8eb4dc38d8309d7128bfa35.mp4',
+                // "https://mira-1255830993.cos.ap-shanghai.myqcloud.com/whale1/104039e918c83facb2fcd42bc235dd57efa49444e8eb4dc38d8309d7128bfa35.srt",
+                'https://mira-1255830993.cos.ap-shanghai.myqcloud.com/whale1/027ed0bf06671c566aa05b36cd2480f885e09b0e93964d65bb252700ec80f587.srt',
                 'test'
             );
         },
@@ -34,6 +37,12 @@ export default {
             FileSave.downloadByUrl(
                 'https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1986451467,394304688&fm=26&gp=0.jpg',
                 'test'
+            );
+        },
+        downloadOssFile() {
+            FileSave.downloadOssFile(
+                'material/video/efa49444e8eb4dc38d8309d7128bfa35.mp4',
+                '0317-特快浏览器-打假视频(1).mp4'
             );
         },
     },
