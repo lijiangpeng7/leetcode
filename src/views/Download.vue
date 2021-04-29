@@ -4,6 +4,8 @@
         <el-button @click="downloadUrlFile">url下载视频</el-button>
         <el-button @click="downloadUrlImg">url下载图片</el-button>
         <el-button @click="downloadOssFile">url下载OSS</el-button>
+
+        <el-button @click="handTriggerError">测试点击</el-button>
     </div>
 </template>
 
@@ -44,6 +46,10 @@ export default {
                 'material/video/efa49444e8eb4dc38d8309d7128bfa35.mp4',
                 '0317-特快浏览器-打假视频(1).mp4'
             );
+        },
+        handTriggerError() {
+            let a = null;
+            console.log(a.length);
         },
     },
 };

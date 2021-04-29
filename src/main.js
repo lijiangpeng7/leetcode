@@ -46,12 +46,12 @@ Vue.config.productionTip = false;
 Vue.prototype.bus = new Vue();
 
 // fundebug 监测
-// import * as fundebug from "fundebug-javascript";
-// import fundebugVue from "fundebug-vue";
-// fundebug.init({
-//     apikey: "986f36e5bf6cfb6f48ca4a7acd9e6df86217f5cbcd5e2c05d6779dd577dbfe92"
-// })
-// fundebugVue(fundebug, Vue);
+import * as fundebug from "fundebug-javascript";
+import fundebugVue from "fundebug-vue";
+fundebug.init({
+  apikey: "bd7e2a6facade98329f4fcb75a0cf0f35e34a947173275613b052a08fe83b4e3",
+});
+fundebugVue(fundebug, Vue);
 
 import vueDragSelectPro from "vue-drag-select-pro";
 // 注意：一定要引入css样式
