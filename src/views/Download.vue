@@ -4,17 +4,40 @@
         <el-button @click="downloadUrlFile">url下载视频</el-button>
         <el-button @click="downloadUrlImg">url下载图片</el-button>
         <el-button @click="downloadOssFile">url下载OSS</el-button>
+        <hr>
+        <el-button @click="handleAddAttr">新增属性</el-button>
+        <el-button>{{obj.name ? obj.name : '空'}}</el-button>
 
-        <el-button @click="handTriggerError">测试点击</el-button>
+        <ul>
+            <li
+                v-for="(item,idx) in list"
+                :key="idx"
+            >{{item}}</li>
+        </ul>
+        <el-button @click="handleAddList">新增列表</el-button>
+
+        <el-button @click="handleChangeStore">改变store</el-button>
+
+        <p>store: {{count}}</p>
+
     </div>
 </template>
 
 <script>
 import FileSave from '@/utils/exportFile';
+import { store, mutations } from '@/store/store1';
 export default {
     name: '',
     data() {
-        return {};
+        return {
+            obj: {},
+            list: [1, 2, 3],
+        };
+    },
+    computed: {
+        count() {
+            return store.count;
+        },
     },
     props: {},
     components: {},
@@ -50,6 +73,20 @@ export default {
         handTriggerError() {
             let a = null;
             console.log(a.length);
+        },
+        handleAddAttr() {
+            // this.obj.name = '1';
+            this.$set(this.obj, 'name', 1);
+        },
+        handleAddList() {
+            this.list[3] = 4;
+            this.$forceUpdate();
+            // this.$delete(this.list, 3);
+            // this.$set(this.list, 3, 4);
+            // this.list.push(4);
+        },
+        handleChangeStore() {
+            mutations.setCount(2);
         },
     },
 };
