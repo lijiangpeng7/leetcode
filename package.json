@@ -22,7 +22,7 @@
     "fundebug-vue": "0.0.1",
     "html2canvas": "^1.0.0-rc.5",
     "img-2": "0.0.4",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "lunr": "^2.3.8",
     "nprogress": "^0.2.0",
     "object-hash": "^2.0.3",
